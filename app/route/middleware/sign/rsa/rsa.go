@@ -41,6 +41,11 @@ func SetUp() gin.HandlerFunc {
 	}
 }
 
+// 创建签名
+func CreateSign(params url.Values) (string, error) {
+	return rsa.PublicEncrypt(createEncryptStr(params), AppSecret)
+}
+
 // 验证签名
 func verifySign(c *gin.Context) (map[string]string, error) {
 	_ = c.Request.ParseForm()
@@ -62,7 +67,7 @@ func verifySign(c *gin.Context) (map[string]string, error) {
 		currentUnix := timeUtil.GetCurrentUnix()
 		req.Set("ts", strconv.FormatInt(currentUnix, 10))
 
-		sn, err := createSign(req)
+		sn, err := CreateSign(req)
 		if err != nil {
 			return nil, errors.New("sn Exception")
 		}
@@ -95,11 +100,6 @@ func verifySign(c *gin.Context) (map[string]string, error) {
 		return nil, errors.New("sn Error")
 	}
 	return nil, nil
-}
-
-// 创建签名
-func createSign(params url.Values) (string, error) {
-	return rsa.PublicEncrypt(createEncryptStr(params), AppSecret)
 }
 
 func createEncryptStr(params url.Values) string {

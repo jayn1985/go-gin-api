@@ -41,6 +41,12 @@ func SetUp() gin.HandlerFunc {
 	}
 }
 
+// 创建签名
+func CreateSign(params url.Values) string {
+	// 自定义 MD5 组合
+	return md5.MD5(AppSecret + createEncryptStr(params) + AppSecret)
+}
+
 // 验证签名
 func verifySign(c *gin.Context) (map[string]string, error) {
 	_ = c.Request.ParseForm()
@@ -63,7 +69,7 @@ func verifySign(c *gin.Context) (map[string]string, error) {
 		req.Set("ts", strconv.FormatInt(currentUnix, 10))
 		res := map[string]string{
 			"ts": strconv.FormatInt(currentUnix, 10),
-			"sn": createSign(req),
+			"sn": CreateSign(req),
 		}
 		return res, nil
 	}
@@ -82,12 +88,6 @@ func verifySign(c *gin.Context) (map[string]string, error) {
 	}
 
 	return nil, nil
-}
-
-// 创建签名
-func createSign(params url.Values) string {
-	// 自定义 MD5 组合
-	return md5.MD5(AppSecret + createEncryptStr(params) + AppSecret)
 }
 
 func createEncryptStr(params url.Values) string {

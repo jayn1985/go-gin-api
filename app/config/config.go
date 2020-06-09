@@ -10,6 +10,8 @@ var (
 			"rsa" : "rsa/public.pem",
 		},
 	}
+
+	JwtSecret = "IgkibX71IEf382PT"
 )
 
 const (
