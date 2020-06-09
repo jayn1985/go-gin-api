@@ -2,12 +2,14 @@ package route
 
 import (
 	"github.com/gin-gonic/gin"
+	"go-gin-api/app/controller/auth"
 	"go-gin-api/app/controller/jaeger_conn"
 	"go-gin-api/app/controller/product"
 	"go-gin-api/app/controller/test"
 	"go-gin-api/app/route/middleware/exception"
 	"go-gin-api/app/route/middleware/jaeger"
 	"go-gin-api/app/route/middleware/logger"
+	"go-gin-api/app/route/middleware/sign/jwt"
 	"go-gin-api/app/util/response"
 )
 
@@ -32,7 +34,13 @@ func SetupRouter(engine *gin.Engine) {
 
 	//@todo 记录请求超时的路由
 
+	AuthRouter := engine.Group("/auth")
+	{
+		AuthRouter.POST("/login", auth.Login)
+	}
+
 	ProductRouter := engine.Group("/product")
+	ProductRouter.Use(sign_jwt.SetUp())
 	{
 		// 新增产品
 		ProductRouter.POST("", product.Add)
