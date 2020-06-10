@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"go-gin-api/app/config"
 	"go-gin-api/app/route"
+	"go-gin-api/app/util/jaeger_trace"
 	"log"
 	"net/http"
 	"os"
@@ -17,6 +18,9 @@ import (
 func main() {
 	gin.SetMode(config.AppMode)
 	engine := gin.New()
+
+	closer := jaeger_trace.InitJaegerTracer(config.AppName, config.JaegerHostPort)
+	defer closer.Close()
 
 	// 性能分析 - 正式环境不要使用！！！
 	pprof.Register(engine)

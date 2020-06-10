@@ -14,7 +14,7 @@ import (
 	"strings"
 )
 
-func NewJaegerTracer(serviceName string, jaegerHostPort string) (opentracing.Tracer, io.Closer) {
+func InitJaegerTracer(serviceName string, jaegerHostPort string) io.Closer {
 
 	cfg := &jaegerConfig.Configuration {
 		Sampler: &jaegerConfig.SamplerConfig{
@@ -34,8 +34,9 @@ func NewJaegerTracer(serviceName string, jaegerHostPort string) (opentracing.Tra
 	if err != nil {
 		panic(fmt.Sprintf("ERROR: cannot init Jaeger: %v\n", err))
 	}
+
 	opentracing.SetGlobalTracer(tracer)
-	return tracer, closer
+	return closer
 }
 
 type MDReaderWriter struct {

@@ -1,0 +1,8 @@
+{"cost_time":"5ms","request_data":{"name":"listen"},"request_method":"/listen.Listen/ListenData","request_time":1591769638243,"response_data":{"message":"[listen]"},"response_error":null}
+{"cost_time":"30ms","request_data":{"name":"speak"},"request_method":"/speak.Speak/SpeakData","request_time":1591769638251,"response_data":{"message":"[speak-[listen]-[HttpGetOk]]"},"response_error":null}
+{"cost_time":"51ms","request_data":{"name":"read"},"request_method":"/read.Read/ReadData","request_time":1591769638282,"response_data":{"message":"[read-[listen]-[HttpGetOk]]"},"response_error":null}
+{"cost_time":"18ms","request_data":{"name":"write"},"request_method":"/write.Write/WriteData","request_time":1591769638336,"response_data":{"message":"[write-[listen]-[HttpGetOk]]"},"response_error":null}
+{"cost_time":"2ms","request_data":{"name":"listen"},"request_method":"/listen.Listen/ListenData","request_time":1591770211233,"response_data":{"message":"[listen]"},"response_error":null}
+{"cost_time":"12ms","request_data":{"name":"speak"},"request_method":"/speak.Speak/SpeakData","request_time":1591770211239,"response_data":{"message":"[speak-[listen]-[HttpGetOk]]"},"response_error":null}
+{"cost_time":"6ms","request_data":{"name":"read"},"request_method":"/read.Read/ReadData","request_time":1591770211252,"response_data":{"message":"[read-[listen]-[HttpGetOk]]"},"response_error":null}
+{"cost_time":"10ms","request_data":{"name":"write"},"request_method":"/write.Write/WriteData","request_time":1591770211259,"response_data":{"message":"[write-[listen]-[HttpGetOk]]"},"response_error":null}
